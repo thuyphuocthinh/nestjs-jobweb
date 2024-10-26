@@ -49,6 +49,19 @@ export class UsersService {
     }
   }
 
+  async findOneByUsername(username: string) {
+    try {
+      const user = await this.userModel.findOne({email: username});
+      return user;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  isValidPassword(password: string, hashPassword: string) {
+    return bcrypt.compareSync(password, hashPassword);
+  }
+
   async update(updateUserDto: UpdateUserDto) {
     try {
       await this.userModel.updateOne({_id: new Types.ObjectId(updateUserDto.id)}, updateUserDto)
