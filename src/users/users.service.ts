@@ -51,7 +51,7 @@ export class UsersService {
 
   async findOneByUsername(username: string) {
     try {
-      const user = await this.userModel.findOne({email: username});
+      const user = await this.userModel.findOne({email: username}).lean();
       return user;
     } catch (error) {
       return error;
