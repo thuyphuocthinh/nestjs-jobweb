@@ -22,7 +22,12 @@ async function bootstrap() {
   app.setViewEngine('ejs');
   // validation class
   app.useGlobalPipes(new ValidationPipe())
-
+  // cors config
+  app.enableCors({
+    origin: "",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    preflightContinue: false,
+  });
   await app.listen(configService.get<string>("PORT"));
 }
 bootstrap();
